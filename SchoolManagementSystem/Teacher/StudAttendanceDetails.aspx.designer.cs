@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SchoolManagementSystem.Admin
+namespace SchoolManagementSystem.Teacher
 {
 
 
-    public partial class MarkDetails
+    public partial class StudentAttendanceDetails
     {
 
         /// <summary>
-        /// MarkDetails1 control.
+        /// StudentAttendance1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SchoolManagementSystem.MarksDetailsUserControl MarkDetails1;
+        protected global::SchoolManagementSystem.StudentAttendanceUC StudentAttendance1;
     }
 }

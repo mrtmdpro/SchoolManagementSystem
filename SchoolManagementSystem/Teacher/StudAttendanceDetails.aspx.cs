@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SchoolManagementSystem.Teacher
 {
-    public partial class TeacherHome : System.Web.UI.Page
+    public partial class StudentAttendanceDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

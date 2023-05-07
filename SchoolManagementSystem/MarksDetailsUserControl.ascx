@@ -1,12 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminMst.Master" AutoEventWireup="true" CodeBehind="MarkDetails.aspx.cs" Inherits="SchoolManagementSystem.Admin.MarkDetails" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MarksDetailsUserControl.ascx.cs" Inherits="SchoolManagementSystem.MarksDetailsUserControl" %>
 
-<%@ Register src="~/MarksDetailsUserControl.ascx" tagPrefix="uc" tagName="MarkDetails" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-    <uc:MarkDetails runat="server" ID="MarkDetails1"/>
-    <%--<div style="background-image:url('../Images/WhiteBG.jpg'); width:100%; height: 1080px; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+    <div style="background-image:url('../Images/WhiteBG.jpg'); width:100%; height: 1080px; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
         <div class="container p-md-4 p-sm-4">
             <div>
                 <asp:Label ID="lblMsg" runat="server"></asp:Label>
@@ -30,7 +24,7 @@
 
             <div class="row mb-3 mr-lg-5 ml-lg-5 mt-md-5">
                 <div class="col-md-3 col-md-offset-2 mb-3">
-                    <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary btn-block" BackColor="#5558C9" Text="Geet Marks" OnClick="btnAdd_OnClick"/>
+                    <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary btn-block" BackColor="#5558C9" Text="Get Marks" OnClick="btnAdd_OnClick"/>
                 </div>
             </div>
 
@@ -73,6 +67,4 @@
                 </div>
             </div>
         </div>
-    </div>--%>
-
-</asp:Content>
+    </div>

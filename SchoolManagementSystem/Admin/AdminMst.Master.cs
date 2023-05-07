@@ -13,5 +13,11 @@ namespace SchoolManagementSystem.Admin
         {
 
         }
+
+        protected void btnLogOut_OnClick(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("../Login.aspx");
+        }
     }
 }

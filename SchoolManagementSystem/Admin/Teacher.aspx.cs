@@ -14,6 +14,10 @@ namespace SchoolManagementSystem.Admin
         CommonFnx fn = new CommonFnx();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["admin"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
             if (!IsPostBack)
             {
                 GetTeachers();
@@ -38,7 +42,8 @@ namespace SchoolManagementSystem.Admin
                     DataTable dt = fn.Fetch("SELECT * FROM Teachers WHERE TeacherEmail = '" + email + "'");
                     if (dt.Rows.Count == 0)
                     {
-                        string query = "INSERT INTO Teachers VALUES ('" + txtName.Text.Trim() + "', '"+txtDoB.Text.Trim() +"', '"+ ddlGender.SelectedValue + "', '"+ txtMobile.Text.Trim() +"', '"+ txtEmail.Text.Trim() +"', '"+ txtAddress.Text.Trim() +"', '"+ txtPassword.Text.Trim() +"')";
+                        string hashedPassword = CommonFnx.ComputeHash(txtPassword.Text.Trim());
+                        string query = "INSERT INTO Teachers VALUES ('" + txtName.Text.Trim() + "', '"+txtDoB.Text.Trim() +"', '"+ ddlGender.SelectedValue + "', '"+ txtMobile.Text.Trim() +"', '"+ txtEmail.Text.Trim() +"', '"+ txtAddress.Text.Trim() +"', '"+ hashedPassword.Trim() +"')";
                         fn.Query(query);
                         lblMsg.Text = "Inserted successful!";
                         lblMsg.CssClass = "alert alert-success";
@@ -113,8 +118,9 @@ namespace SchoolManagementSystem.Admin
                 string teacherName = (row.FindControl("txtName") as TextBox).Text;
                 string teacherPhone = (row.FindControl("txtMobile") as TextBox).Text;
                 string teacherPassword = (row.FindControl("txtPassword") as TextBox).Text;
+                string hasedPassword = CommonFnx.ComputeHash(teacherPassword);
                 string teacherAddress = (row.FindControl("txtAddress") as TextBox).Text;
-                fn.Query("UPDATE Subjects SET TeacherName = '" + teacherName.Trim() + "', TeacherPhone = '" + teacherPhone.Trim() + "', TeacherAddress = '"+ teacherAddress.Trim() +"', TeacherPassword = '"+ teacherPassword.Trim() +"' WHERE TeacherId = '" + teacherId + "'");
+                fn.Query("UPDATE Subjects SET TeacherName = '" + teacherName.Trim() + "', TeacherPhone = '" + teacherPhone.Trim() + "', TeacherAddress = '"+ teacherAddress.Trim() +"', TeacherPassword = '"+ hasedPassword.Trim() +"' WHERE TeacherId = '" + teacherId + "'");
                 lblMsg.Text = "Teacher updated successful.";
                 lblMsg.CssClass = "alert alert-success";
                 GridView1.EditIndex = -1;

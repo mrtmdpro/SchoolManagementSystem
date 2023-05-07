@@ -14,6 +14,10 @@ namespace SchoolManagementSystem.Admin
         CommonFnx fn = new CommonFnx();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["admin"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
             if (!IsPostBack)
             {
                 GetClass();
@@ -60,7 +64,8 @@ namespace SchoolManagementSystem.Admin
 
         private void GetExpense()
         {
-            DataTable dt = fn.Fetch(@"SELECT Row_NUMBER() Over(Order by(Select 1)) AS [Sr.No], E.ExpenseId, E.ClassId, C.ClassName, S.SubjectId, 
+            var dt = fn.Fetch(
+                @"SELECT Row_NUMBER() Over(Order by(Select 1)) AS [Sr.No], E.ExpenseId, E.ClassId, C.ClassName, S.SubjectId, 
                                            S.SubjectName, E.ChargeAmount FROM Expenses AS E INNER JOIN Classes C ON E.ClassId = C.ClassId INNER JOIN Subjects S ON E.SubjectId = S.SubjectId");
             GridView1.DataSource = dt;
             GridView1.DataBind();
@@ -75,7 +80,7 @@ namespace SchoolManagementSystem.Admin
                 string chargeAmt = txtExpenseAmt.Text.Trim();
                 DataTable dt =
                     fn.Fetch("SELECT * FROM Expenses WHERE ClassId = '" + classId +
-                             "' AND (SubjectId = '" + subjectId + "' OR ChargeAmount = '"+ chargeAmt +"')");
+                             "' AND SubjectId = '" + subjectId + "'");
                 if (dt.Rows.Count == 0)
                 {
                     string query = "INSERT INTO Expenses Values('" + classId + "','" + subjectId + "', '"+chargeAmt+"')";
